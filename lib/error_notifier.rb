@@ -5,7 +5,7 @@ require 'json'
 require 'rest_client'
 
 module ErrorNotifier
-  Version = '0.0.2'
+  Version = '0.0.3'
 
   class << self
     attr_accessor :configuration
