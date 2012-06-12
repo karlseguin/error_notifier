@@ -10,4 +10,8 @@ Gem::Specification.new do |s|
   s.version            = ErrorNotifier::Version
   s.platform           = Gem::Platform::RUBY
   s.files              = Dir.glob("{lib}/**/*") + %w[license readme.markdown]
+
+  s.add_dependency("rest-client", ["~> 1.6.7"])
+  s.add_dependency("rack", ["~> 1.4.1"])
+  s.add_dependency("json", ["~> 1.7.3"])
 end
