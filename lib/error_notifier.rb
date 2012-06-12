@@ -5,7 +5,7 @@ require 'json'
 require 'rest_client'
 
 module ErrorNotifier
-  Version = '0.0.4'
+  Version = '0.0.5'
 
   class << self
     attr_accessor :configuration
@@ -24,7 +24,14 @@ module ErrorNotifier
       data[:stack] = exception.backtrace.join('\n')
       data[:site] = @configuration.site
       begin
-        RestClient.post(@configuration.url, data.to_json, :content_type => :json, :accept => :json)
+        RestClient::Request.execute(
+          :method => :post,
+          :url => @configuration.url,
+          :payload => data.to_json,
+          :headers => {:content_type => :json, :accept => :json},
+          :open_timeout => @configuration.open_timeout,
+          :timeout => @configuration.timeout
+        )
       rescue
         nil
       end
