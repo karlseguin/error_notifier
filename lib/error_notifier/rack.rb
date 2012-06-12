@@ -14,7 +14,7 @@ module ErrorNotifier
     end
 
     def extract_data(env)
-      {:url => env['REQUEST_URI'], :user_agent => env['HTTP_USER_AGENT']}
+      {:url => env['REQUEST_URI'], :ua => env['HTTP_USER_AGENT']}
     end
   end
 end

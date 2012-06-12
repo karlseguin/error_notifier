@@ -5,7 +5,7 @@ require 'json'
 require 'rest_client'
 
 module ErrorNotifier
-  Version = '0.0.1'
+  Version = '0.0.2'
 
   class << self
     attr_accessor :configuration
@@ -20,7 +20,8 @@ module ErrorNotifier
 
     def send(exception, data = {})
       exception = unwrap(exception)
-      data[:exception] = {:message => exception.inspect, :backtrace => exception.backtrace}
+      data[:message] = exception.inspect
+      data[:stack] = exception.backtrace.join('\n')
       data[:site] = @configuration.site
       begin
         RestClient.post(@configuration.url, data.to_json, :content_type => :json, :accept => :json)
